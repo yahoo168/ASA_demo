@@ -1,0 +1,102 @@
+<!DOCTYPE HTML> {%load static%}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+    <link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <!----font-Awesome----->
+    <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+    <!----font-Awesome----->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <!-- start plugins -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!----Calender -------->
+    <link rel="stylesheet" href="{% static 'css/clndr.css' %}" type="text/css" />
+    <script src="{% static 'js/underscore-min.js' %}"></script>
+    <script src="{% static 'js/moment-2.2.1.js' %}"></script>
+    <script src="{% static 'js/clndr.js' %}"></script>
+    <script src="{% static 'js/site.js' %}"></script>
+    <!--- start circle --->
+    <script src="{% static 'js/jquery.circliful.min.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myStat2').circliful();
+        });
+    </script>
+    <!-- start price_bar  -->
+    <link href="{% static 'css/jquery.nouislider.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery.nouislider.js' %}"></script>
+</head>
+
+<body>
+    <div class="main_bg">
+        <div class="container">
+            <div class="main">
+                <div class="col-md-8 span_of_2">
+                    <!-- start span1_of_2 -->
+                    <div class="col-md-6 span1_of_1">
+                        <!-- start span1_of_3 style1 -->
+                    </div>
+                    <div class="col-md-6 span1_of_2">
+                        <!-- start span1_of_3 style2 -->
+                        <div class="grid2_of_1">
+                            <div class="signin_form">
+                                <h4>新增報告</h4>
+                                <form>
+                                    <input type="text" style="display: inline; width: 301.5px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="股票代號">
+
+                                    <input type="text" style="display: inline; width: 301.5px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="日期 (e.g. 20210403)">
+                                    <br>
+                                    <br>
+                                    <input type="text" style="display: inline; width: 301.5px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="目標價">
+
+                                    <input type="text" style="display: inline; width: 301.5px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="預測機率">
+                                    <br>
+                                    <br>
+                                    <input type="text" style="height: 150px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="報告內容">
+                                    <input type="button" value="送出" class="bg1" onclick="location.href='./index.html'" />
+                                    <input type="button" value="返回" class="bg2" onclick="location.href='./index.html'" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end span1_of_2 -->
+
+            </div>
+        </div>
+    </div>
+    <div style="display:none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDate").value;
+            document.getElementById("demo").innerHTML = x;
+        }
+    </script>
+</body>
+
+</html>
