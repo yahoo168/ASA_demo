@@ -62,7 +62,7 @@
                         <div class="grid2_of_1">
                             <div class="signin_form">
                                 <h4>新增報告</h4>
-                                <form>
+                                <form action="./addData" method="post">
                                     <input type="text" style="display: inline; width: 301.5px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="股票代號">
 
                                     <input type="text" style="display: inline; width: 301.5px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="日期 (e.g. 20210403)">
@@ -74,9 +74,9 @@
                                     <br>
                                     <br>
                                     <input type="text" style="height: 150px;" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="報告內容">
-                                    <input type="button" value="送出" class="bg1" onclick="location.href='./index.html'" />
-                                    <input type="button" value="返回" class="bg2" onclick="location.href='./index.html'" />
+                                    <input type="submit" value="送出" class="bg1" onclick="location.href='./index.html'" />
                                 </form>
+                                <input type="button" value="返回" class="bg2" onclick="location.href='./index.html'" />
                             </div>
                         </div>
                         <div class="clearfix"></div>
