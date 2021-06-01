@@ -61,8 +61,7 @@
                     <nav>
                         <ul class="menu list-unstyled">
                             <li class="color1"><a href="#">HOME</a></li>
-                            <li class="color2"><a href="#">My profile</a></li>
-                            <li class="color6"><a href="#">CONTACT</a></li>
+
                             <li class="color2"><a href="../accounts/logout">LOGOUT</a></li>
                         </ul>
                     </nav>
@@ -82,14 +81,12 @@
                                     <input type="radio" id="option2" name="name" tabindex="2">
                                     <span>名稱</span>
                                   </label>
-                                <label for="option3" class="l-radio">
-                                    <input type="radio" id="option3" name="fluctuation" tabindex="3">
-                                    <span>漲跌</span>
-                                  </label>
+
                                 <label for="option4" class="l-radio">
                                       <input type="radio" id="option4" name="time" tabindex="4">
                                       <span>時間</span>
                                     </label>
+
                                 <input type="text" class="form-control" name="search" aria-label="Text input with segmented dropdown button">
                                 <input type="submit" value="Search" class="btn btn-outline-secondary">
                             </form>
@@ -133,6 +130,7 @@
                         <th scope="col">原始價</th>
                         <th scope="col">累積漲跌幅</th>
                         <th scope="col">報告內容</th>
+                        <th scope="col">報告評分</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -146,10 +144,10 @@
                         <td>{{item.origin_price}}</td>
                         <td>{{item.fluctuation}}</td>
                         <td>{{item.content}}</td>
+                        <td>{{item.score}}</td>
                         <!-- 這裡要改 -->
-                        <td><button type="button" class="btn btn-secondary btn-sm">修改</button>
-                            <button type="button" class="btn btn-secondary btn-sm">輸出</button>
-                            <button type="button" class="btn btn-secondary btn-sm">刪除</button></td>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='./delete'">刪除</button></td>
                     </tr>
                     {% endfor %} {% endif %}
                 </tbody>
