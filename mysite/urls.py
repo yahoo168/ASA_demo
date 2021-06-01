@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from restaurants.views import here, add
-from mysite.views import login, index, logout, register
+from mysite.views import login, index, logout, register, keyword_search, show_homepage_index, add_report, delete_report
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -26,4 +26,8 @@ urlpatterns = [
     path('accounts/login/login', login),
     path('accounts/logout/', logout),
     path('accounts/register/', register),
+    path('index/', keyword_search),
+    path('index/', show_homepage_index),
+    path('add_data/', add_report),
+    path('index/', delete_report)
 ]
