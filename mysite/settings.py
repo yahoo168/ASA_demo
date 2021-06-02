@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'os_final', # 目標資料庫的名稱
+        'NAME': 'SAD_final', # 目標資料庫的名稱
         'USER': 'root', # 資料庫帳號
-        'PASSWORD': 'yahoo210', # 資料庫密碼
+        'PASSWORD': '12345678', # 資料庫密碼
         'HOST': 'localhost', # 主機位置，可以先測本地localhost
         'PORT': '3306', # 設定連接埠
     }
