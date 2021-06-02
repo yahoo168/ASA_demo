@@ -60,7 +60,7 @@
                     <a id="touch-menu" class="mobile-menu" href="#">Menu</a>
                     <nav>
                         <ul class="menu list-unstyled">
-                            <li class="color1"><a href="#">HOME</a></li>
+                            <li class="color1"><a href="../index">HOME</a></li>
 
                             <li class="color2"><a href="../accounts/logout">LOGOUT</a></li>
                         </ul>
@@ -70,28 +70,27 @@
 
                 <div class="col-md-8 span_of_2" style="position:relative; left: 18%;">
                     <!-- start span1_of_3 style1 -->
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <form action="./search" method="post">
-                                <label for="option1" class="l-radio">
+                    <form action="./search" method="post">
+                        <div class="input-group">
+                            <label for="option1" class="l-radio">
                                     <input type="radio" id="option1" name="reporter" tabindex="1">
                                     <span>報告人姓名</span>
                                   </label>
-                                <label for="option2" class="l-radio">
+                            <label for="option2" class="l-radio">
                                     <input type="radio" id="option2" name="name" tabindex="2">
                                     <span>名稱</span>
                                   </label>
 
-                                <label for="option4" class="l-radio">
+                            <label for="option4" class="l-radio">
                                       <input type="radio" id="option4" name="time" tabindex="4">
                                       <span>時間</span>
                                     </label>
-
-                                <input type="text" class="form-control" name="search" aria-label="Text input with segmented dropdown button">
-                                <input type="submit" value="Search" class="btn btn-outline-secondary">
-                            </form>
                         </div>
-                    </div>
+                        <div class="input-group-append">
+                            <input type="text" class="form-control" name="search" aria-label="Text input with segmented dropdown button">
+                            <input type="submit" value="Search" class="btn btn-outline-secondary">
+                        </div>
+                    </form>
                 </div>
             </div>
             <br>
@@ -99,22 +98,20 @@
             <br>
             <div class="container">
                 <div class="row">
+                    <!-- 給後端大隊長：這裏我們要放股價資料 名稱如下 原則上就五個排版才會好看 阿股票隨便你們選 -->
                     <!-- 這裡拿來放各種大盤指數-->
+                    {% if stock %} {% for s in stock %}
                     <div class="col headerDivider1">
-                        <span style="font-size: 24px;">1 of 5 </span>
+                        <span style="font-size: 14px; color:grey">
+                            {{s.name}}
+                        </span>
+                        <br>
+                        <span style="font-size: 28px;">
+                            {{s.price}}
+                        </span>
+                        <br> NTD
                     </div>
-                    <div class="col headerDivider2">
-                        <span style="font-size: 24px;">2 of 5 </span>
-                    </div>
-                    <div class="col headerDivider2">
-                        <span style="font-size: 24px;">3 of 5 </span>
-                    </div>
-                    <div class="col headerDivider2">
-                        <span style="font-size: 24px;">4 of 5 </span>
-                    </div>
-                    <div class="col headerDivider2">
-                        <span style="font-size: 24px;">5 of 5 </span>
-                    </div>
+                    {% endfor %} {% endif %}
                 </div>
             </div>
             <br>
@@ -145,14 +142,17 @@
                         <td>{{item.fluctuation}}</td>
                         <td>{{item.content}}</td>
                         <td>{{item.score}}</td>
-                        <!-- 這裡要改 -->
+                        <!-- 給後端大隊長：item 多加一個代表這份報告的index e.g. rp001 之類的 我們要刪除的時候就回傳這個給你們 -->
                         <td>
-                            <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='./delete'">刪除</button></td>
+                            <form action="./delete" method="POST">
+                                <button type="button" class="btn btn-secondary btn-sm" value="{{ item.index }}">刪除</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %} {% endif %}
                 </tbody>
             </table>
-            <a href="./add_data.html" target="_blank" rel="noopener noreferrer">
+            <a href="../add_data" target="_blank" rel="noopener noreferrer">
                 <img src="{% static './images/plus.png' %}" alt="新增" width="30" style="display:block; margin:auto;">
             </a>
             <!-- end span1_of_2 -->
