@@ -38,28 +38,8 @@ def register(request):
     return render(request, 'register.html', locals())
 
 def index(request):
-    return render(request, 'index.html')
-
-def keyword_search(request): #搜尋關鍵字
-#接收前端的 request -> ex: 姓名搜尋
-    post_dict = request.POST
-    if request.type == "name":
-        result_df = post_dict[post_dict["username"] == request.username]
-    elif request.type == "stock":
-        result_df = post_dict[post_dict["stockname"] == request.stockname]
-
-    json_df = result_df.to_json(orient ='records')
-    data = json.loads(json_df)
-    context = {'d':data}
-    # 須確認頁面
-    return render(request, 'index.html', context)
-
-#def plot_evaluation_period(request):
-
-def show_homepage_index(request):
-# 五個plot放重要的幾個股票指數
-    stock_dict = request.POST.stockPrice #??
-    result_df = stock_dict['AAPL']
+    # 五個plot放重要的幾個股票指數
+    result_df = stock_DB['AAPL']
     time = np.array(0,len(result_df),1)
     #draw plot
     from matplotlib.font_manager import FontProperties
@@ -75,30 +55,83 @@ def show_homepage_index(request):
     canvas.print_png(response)
     return render(request, 'index.html', response)
 
+def keyword_search(request): #搜尋關鍵字
+    post_dict = request.POST
+
+    # TODO: report_DB要改掉
+    if post_dict['reporter'] == True:
+        data = report_DB[report_DB["username"] == post_dict['content']]
+    elif post_dict['stock'] == True:
+        data = post_dict[post_dict["stockname"] == post_dict['content']]
+    elif post_dict['date'] == True:
+        data = post_dict[post_dict["date"] == post_dict['content']]
+
+    json_df = data.to_json(orient ='records')
+    data = json.loads(json_df)
+    return render(request, 'index.html', locals())
+
+def evaluation_period(request):
+    post_dict = request.POST
+
+    #TODO: 改DB
+    data = report_DB[report_DB["index"] == post_dict['report_index']]
+    price1 = data['price1']
+    price2 = data['price2']
+    price3 = data['price3']
+
+    prob1 = data['prediction1']
+    prob2 = data['prediction1']
+    prob3 = data['prediction1']
+
+    #TODO: 改DB
+    error = {(price1 - stock_DB[post_dict['stockname']]['''第一期的price''']) * prob1 +
+             (price2 - stock_DB[post_dict['stockname']]['''第二期的price''']) * prob2 +
+             (price3 - stock_DB[post_dict['stockname']]['''第三期的price''']) * prob3 }
+
+    target_change = price1 * prob1 + price2 * prob2 + price3 * prob3
+
+    error_score = error / target_change
+    return render(request, 'index.html', error_score)
+
 def add_report(request):
     post_dict = request.POST
 
-    username = post_dict["username"]
-    stockname = post_dict["stockname"]
-    date = post_dict["date"]
-    expPrice = post_dict["expPrice"]
-    predProb = post_dict["predProb"]
+    #TODO: 給新的reort一個自己的id
+    index = "Report001"
 
-    Report.objects.create(username = username, stockname = stockname, date = date, expPrice = expPrice, predProb = predProb)
+    reporter = post_dict["reporter"]
+    stockname = post_dict["stock"]
+    date = post_dict["date"]
+    price1 = post_dict["price1"]
+    predProb1 = post_dict["prediction1"]
+    price2 = post_dict["price2"]
+    predProb2 = post_dict["prediction2"]
+    price3 = post_dict["price3"]
+    predProb3 = post_dict["prediction3"]
+    content = post_dict["content"]
+
+    #TODO (Report要寫一個model.py來做一個class)
+    Report.objects.create(index = index, reporter = reporter, stockname = stockname, date = date, price1 = price1, predProb1 = predProb1, price2 = price2, predProb2 = predProb2, price3 = price3, predProb3 = predProb3, content = content)
     alert_message = "已成功新增報告"
-    return render(request, 'add_data.html', locals())
+    return render(request, 'index.html', locals())
 
 
 def delete_report(request):
     post_dict = request.POST
 
-    username = post_dict["username"]
-    stockname = post_dict["stockname"]
+    reporter = post_dict["reporter"]
+    stockname = post_dict["stock"]
     date = post_dict["date"]
-    expPrice = post_dict["expPrice"]
-    predProb = post_dict["predProb"]
+    price1 = post_dict["price1"]
+    predProb1 = post_dict["prediction1"]
+    price2 = post_dict["price2"]
+    predProb2 = post_dict["prediction2"]
+    price3 = post_dict["price3"]
+    predProb3 = post_dict["prediction3"]
+    content = post_dict["content"]
 
-    report = Report.objects.get(username = username, stockname = stockname, date = date, expPrice = expPrice, predProb = predProb)
+    #TODO (Report要寫一個model.py來做一個class)
+    report = Report.objects.get(reporter = reporter, stockname = stockname, date = date, price1 = price1, predProb1 = predProb1, price2 = price2, predProb2 = predProb2, price3 = price3, predProb3 = predProb3, content = content)
     report.delete()
     alert_message = "已成功刪除報告"
     return render(request, 'index.html', locals())
