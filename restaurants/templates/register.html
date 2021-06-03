@@ -61,13 +61,14 @@
                         <div class="grid2_of_1">
                             <div class="signin_form">
                                 <h4>register</h4>
-                                <form>
-                                    <input type="text" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Account">
-                                    <input type="password" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Password">
-                                    <input type="password" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Confirm Password">
+                                <form action="../register/" method="post">
+                                    <input name="username" type="text" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Account">
+                                    <input name="password" type="password" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Password">
+                                    <input name="password" type="password" class="textbox" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" placeholder="Confirm Password">
                                     <!-- <div style="text-align: center;"><input type="button" value="join" class="bg1" onclick="location.href='/accounts/register'" /></div> -->
-                                    <input type="submit" value="join" class="bg1" onclick="location.href='../accounts/register'" />
-                                    <input type="button" value="Cancel" class="bg2" onclick="location.href='../index'" />
+                                    {% comment %} <input type="submit" value="join" class="bg1" onclick="location.href='../accounts/register'" /> {% endcomment %}
+                                    <input type="submit" value="join" class="bg1"/>
+                                    <input type="button" value="Cancel" class="bg2" onclick="location.href='../login'" />
                                 </form>
                             </div>
                         </div>

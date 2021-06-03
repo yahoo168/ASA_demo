@@ -68,6 +68,29 @@
                     <script src="{% static 'js/menu.js' %}" type="text/javascript"></script>
                 </div>
 
+                <div class="container">
+                <div class="row">
+                    <!-- 這裡拿來放各種大盤指數-->
+                    <div class="col headerDivider1">
+                        <span style="font-size: 24px;">FB: {{fb_latest_price}} </span>
+                        <br>
+                        <span style="font-size: 24px;">{{latest_date}} </span>
+                    </div>
+                    <div class="col headerDivider2">
+                        <span style="font-size: 24px;">MSFT: {{msft_latest_price}} </span>
+                        <br>
+                        <span style="font-size: 24px;">{{latest_date}} </span>
+                    </div>
+                    <div class="col headerDivider2">
+                        <span style="font-size: 24px;">TSLA: {{tsla_latest_price}} </span>
+                        <br>
+                        <span style="font-size: 24px;">{{latest_date}} </span>
+                    </div>
+                    
+                </div>
+            
+            <br> </br>
+            </div>
                 <div class="col-md-8 span_of_2" style="position:relative; left: 18%;">
                     <!-- start span1_of_3 style1 -->
                     <form action="./search" method="post">
