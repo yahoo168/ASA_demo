@@ -9,8 +9,8 @@ from django.db import models
 
 
 class StockPrice(models.Model):
-    index = models.BigIntegerField(blank=True, null=True)
-    unnamed_0 = models.DateTimeField(db_column='Unnamed: 0', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    # index = models.BigIntegerField(blank=True, null=True)
+    date = models.DateTimeField(db_column='date', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     adm = models.FloatField(db_column='ADM', blank=True, null=True)  # Field name made lowercase.
     adp = models.FloatField(db_column='ADP', blank=True, null=True)  # Field name made lowercase.
     adsk = models.FloatField(db_column='ADSK', blank=True, null=True)  # Field name made lowercase.
