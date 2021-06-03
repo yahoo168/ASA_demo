@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
+from restaurants.models import StockPrice
 
 def login(request):
     if request.user.is_authenticated:
@@ -28,6 +29,7 @@ def logout(request):
     return HttpResponseRedirect('/accounts/login/')
 
 def register(request):
+    print(request.POST)
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -38,22 +40,30 @@ def register(request):
     return render(request, 'register.html', locals())
 
 def index(request):
+    stockPrice_df = pd.DataFrame(list(StockPrice.objects.all().values()))
+    #以資料庫最新的價格在首頁展示（FB、MSFT）
+    fb_latest_price = round((stockPrice_df["fb"]).iloc[-1], 2)
+    msft_latest_price = round((stockPrice_df["msft"]).iloc[-1], 2)
+    tsla_latest_price = round((stockPrice_df["tsla"]).iloc[-1], 2)
+    latest_date = (stockPrice_df["date"]).iloc[-1]
+    latest_date = latest_date.strftime("%Y-%m-%d")
     # 五個plot放重要的幾個股票指數
-    result_df = stock_DB['AAPL']
-    time = np.array(0,len(result_df),1)
-    #draw plot
-    from matplotlib.font_manager import FontProperties
-    fig, ax = plt.subplots()
-    ax.plot(time, result_df)
-    ax.set(xlabel='time (s)', ylabel='price',
-           title='APPL stock price')
-    ax.grid()
+    # result_df = stock_DB['AAPL']
+    result_df = pd.DataFrame()
+    # time = np.array(0,len(result_df))
+    # #draw plot
+    # from matplotlib.font_manager import FontProperties
+    # fig, ax = plt.subplots()
+    # ax.plot(time, result_df)
+    # ax.set(xlabel='time (s)', ylabel='price',
+    #        title='APPL stock price')
+    # ax.grid()
 
-    #return
-    response = HttpResponse(content_type = 'image/png')
-    canvas = FigureCanvasAgg(fig)
-    canvas.print_png(response)
-    return render(request, 'index.html', response)
+    # #return
+    # response = HttpResponse(content_type = 'image/png')
+    # canvas = FigureCanvasAgg(fig)
+    # canvas.print_png(response)
+    return render(request, 'index.html', locals())
 
 def keyword_search(request): #搜尋關鍵字
     post_dict = request.POST
