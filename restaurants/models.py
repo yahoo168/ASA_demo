@@ -7,9 +7,42 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+# class Report(models.Model):
+#     id = models.IntegerField(blank=True, primary_key=True)
+#     name = models.CharField(db_column='name', blank=True, null=True, max_length=10)  # Field name made lowercase.
+#     stockname = models.CharField(db_column='stockname', blank=True, null=True, max_length=10)  # Field name made lowercase.
+#     date = models.DateTimeField(db_column='date', blank=True, null=True)  # Field name made lowercase.
+#     price1 = models.FloatField(db_column='price1', blank=True, null=True)  # Field name made lowercase.
+#     price2 = models.FloatField(db_column='price2', blank=True, null=True)  # Field name made lowercase.
+#     price3 = models.FloatField(db_column='price3', blank=True, null=True)  # Field name made lowercase.
+#     probability1 = models.FloatField(db_column='probability1', blank=True, null=True)  # Field name made lowercase.
+#     probability2 = models.FloatField(db_column='probability2', blank=True, null=True)  # Field name made lowercase.
+#     probability3 = models.FloatField(db_column='probability3', blank=True, null=True)  # Field name made lowercase.
+#     content = models.CharField(db_column='content', blank=True, null=True, max_length=100)  # Field name made lowercase.
+
+#     class Meta:
+#         managed = False
+#         db_table = 'report'
+
+class Report(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=10)
+    stockname = models.CharField(max_length=10)
+    date = models.DateTimeField()
+    price1 = models.FloatField()
+    price2 = models.FloatField()
+    price3 = models.FloatField()
+    probability1 = models.FloatField()
+    probability2 = models.FloatField()
+    probability3 = models.FloatField()
+    content = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'report'
 
 class StockPrice(models.Model):
-    # index = models.BigIntegerField(blank=True, null=True)
+    id = models.BigIntegerField(blank=True, primary_key=True)
     date = models.DateTimeField(db_column='date', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     adm = models.FloatField(db_column='ADM', blank=True, null=True)  # Field name made lowercase.
     adp = models.FloatField(db_column='ADP', blank=True, null=True)  # Field name made lowercase.
