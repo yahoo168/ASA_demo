@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/register/', register),
     path('index/search', keyword_search),
     path('index/', evaluation_period),
-    path('add_data/addData/', add_report),
+    path('add_data/', add_report_page),
+    path('add_data/addData', add_report),
     path('index/delete', delete_report)
 ]
