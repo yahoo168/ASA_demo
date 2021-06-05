@@ -97,17 +97,17 @@
                         <div class="input-group">
                             <label for="option1" class="l-radio">
                                     <input type="radio" id="option1" name="reporter" tabindex="1">
-                                    <span>報告人姓名</span>
+                                    <span>作者姓名</span>
                                   </label>
                             <label for="option2" class="l-radio">
-                                    <input type="radio" id="option2" name="name" tabindex="2">
-                                    <span>名稱</span>
+                                    <input type="radio" id="option2" name="stock_name" tabindex="2">
+                                    <span>標的名稱</span>
                                   </label>
 
-                            <label for="option4" class="l-radio">
+                            {% comment %} <label for="option4" class="l-radio">
                                       <input type="radio" id="option4" name="time" tabindex="4">
                                       <span>時間</span>
-                                    </label>
+                                    </label> {% endcomment %}
                         </div>
                         <div class="input-group-append">
                             <input type="text" class="form-control" name="search" aria-label="Text input with segmented dropdown button">
@@ -143,29 +143,39 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">名稱</th>
-                        <th scope="col">報告人</th>
-                        <th scope="col">現價</th>
+                        <th scope="col">報告發出日</th>
+                        <th scope="col">報告作者</th>
+                        <th scope="col">標的名稱</th>
                         <th scope="col">原始價</th>
-                        <th scope="col">累積漲跌幅</th>
-                        <th scope="col">報告內容</th>
-                        <th scope="col">報告評分</th>
+                        <th scope="col">現價</th>
+                        <th scope="col">累積漲跌幅(%)</th>
+                        <th scope="col">目標價</th>
+                        <th scope="col">預測價1（機率%）</th>
+                        <th scope="col">預測價2（機率%）</th>
+                        <th scope="col">預測價3（機率%）</th>
+                        {% comment %} <th scope="col">報告內容</th> {% endcomment %}
+                        <th scope="col">誤差分數</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in data %}
                     <tr>
-                        <th scope="row">1</th>
+                        <td>{{item.date}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.reporter}}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.origin_price}}</td>
-                        <td>{{item.fluctuation}}</td>
-                        <td>{{item.content}}</td>
+                        <td>{{item.stockname}}</td>
+                        <td>{{item.original_price}}</td>
+                        <td>{{item.latest_price}}</td>
+                        <td>{{item.total_change}}</td>
+                        <td>{{item.target_price}}</td>
+                        <td>{{item.price1}}({{item.probability1}})</td>
+                        <td>{{item.price2}}({{item.probability2}})</td>
+                        <td>{{item.price3}}({{item.probability3}})</td>
+                        
+                        {% comment %} <td>{{item.content}}</td> {% endcomment %}
                         <td>{{item.score}}</td>
                         <!-- 給後端大隊長：item 多加一個代表這份報告的index e.g. rp001 之類的 我們要刪除的時候就回傳這個給你們 -->
+                        <td></td>
                         <td>
                             <form action="./delete" method="POST">
                                 <button type="button" class="btn btn-secondary btn-sm" value="{{ item.index }}">刪除</button>
